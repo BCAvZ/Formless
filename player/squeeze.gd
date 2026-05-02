@@ -71,18 +71,9 @@ func _fire() -> void:
 		# No input — fire downward
 		body.velocity.y = force
 		squash_stretch.on_squeeze_down()
-	else:
-		# Left or right held — fire laterally
-		body.velocity.x = -force * dir
-		body.velocity.y = -abs(force) * LATERAL_LIFT
-		squash_stretch.on_squeeze_lateral()
-		fired_lateral_this_frame = true
-	
-	if dir == 0:
-		body.velocity.y = force
-		squash_stretch.on_squeeze_down()
 		fired.emit("down")
 	else:
+		# Left or right held — fire laterally
 		body.velocity.x = -force * dir
 		body.velocity.y = -abs(force) * LATERAL_LIFT
 		squash_stretch.on_squeeze_lateral()

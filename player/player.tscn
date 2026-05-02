@@ -4,9 +4,13 @@
 [ext_resource type="Script" uid="uid://tc4lvq2uhb5j" path="res://player/squash_stretch.gd" id="2_onrkg"]
 [ext_resource type="Script" uid="uid://b438jqfksgugn" path="res://player/squeeze.gd" id="3_i3pqv"]
 [ext_resource type="PackedScene" uid="uid://ecbo7nrtt1oj" path="res://player/shockwave.tscn" id="4_yw30f"]
+[ext_resource type="Script" uid="uid://dqkciw7hdjlfr" path="res://player/hurtbox.gd" id="5_qjkh3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sh265"]
 radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yw30f"]
+radius = 19.026299
 
 [node name="Player" type="CharacterBody2D" unique_id=262484128 groups=["player"]]
 script = ExtResource("1_4flbx")
@@ -25,3 +29,9 @@ script = ExtResource("2_onrkg")
 [node name="Squeeze" type="Node" parent="." unique_id=1895429019]
 script = ExtResource("3_i3pqv")
 shockwave_scene = ExtResource("4_yw30f")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1455886985]
+script = ExtResource("5_qjkh3")
+
+[node name="HurtHitbox" type="CollisionShape2D" parent="Hurtbox" unique_id=2135458926]
+shape = SubResource("CircleShape2D_yw30f")

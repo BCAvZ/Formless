@@ -27,6 +27,8 @@ var locked_by: Node = null
 func _ready() -> void:
 	var blob = $PlayerModel
 	squeeze.fired.connect(_on_squeeze_fired)
+	Health.died.connect(_on_died)
+	
 	blob.polygon = PackedVector2Array([
 		Vector2(0, -22),
 		Vector2(10, -18),
@@ -58,6 +60,12 @@ func _on_squeeze_fired(_direction: String) -> void:
 	if locked_by != null:
 		locked_by.release_and_fade()
 		unlock_movement()
+
+func _on_died() -> void:
+	# Disable input, play a brief death anim if you want, then respawn.
+	await get_tree().create_timer(0.5).timeout
+	Health.heal_full()
+	get_tree().reload_current_scene()
 
 func _physics_process(delta: float) -> void:
 

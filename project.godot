@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 AbilityManager="*uid://d2pwuxfaxbh48"
+Health="*uid://d0vn7hl38ge8p"
 
 [input]
 

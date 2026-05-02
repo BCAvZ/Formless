@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bpf05dkdn07e1" path="res://player/player.tscn" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://h7xjoc2ck1sp" path="res://enemies/hugger/hugger.tscn" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://dym5nbneqwtkd" path="res://hud/hud.tscn" id="3_c7htk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gv5m4"]
 size = Vector2(87.84375, 23.40625)
@@ -83,3 +84,5 @@ color = Color(0.9529412, 0.88235295, 0.6666667, 1)
 
 [node name="hugger" parent="." unique_id=295790131 instance=ExtResource("2_fj7yv")]
 position = Vector2(697, 372)
+
+[node name="HUD" parent="." unique_id=1919047739 instance=ExtResource("3_c7htk")]
