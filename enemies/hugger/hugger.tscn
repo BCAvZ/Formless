@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://h7xjoc2ck1sp"]
 
-[ext_resource type="Script" uid="uid://d4dm7qlt67hc" path="res://hugger.gd" id="1_il1ns"]
+[ext_resource type="Script" uid="uid://d4dm7qlt67hc" path="res://enemies/hugger/hugger.gd" id="1_il1ns"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pgc0u"]
 size = Vector2(31, 31)

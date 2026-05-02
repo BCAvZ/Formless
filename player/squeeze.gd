@@ -8,7 +8,7 @@ extends Node
 #   - returning a velocity override (or null) from try_fire()
 #   - notifying squash_stretch directly for visual response
 
-const Shockwave = preload("res://shockwave.tscn")
+const Shockwave = preload("res://player/shockwave.tscn")
 
 # --- Tuning ---
 const MAX_CHARGE = 0.5         # max charge time in seconds

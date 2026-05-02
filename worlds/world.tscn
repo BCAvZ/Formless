@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bdvlgarb1265y"]
 
-[ext_resource type="PackedScene" uid="uid://bpf05dkdn07e1" path="res://player.tscn" id="1_f3sb7"]
-[ext_resource type="PackedScene" uid="uid://h7xjoc2ck1sp" path="res://hugger.tscn" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://bpf05dkdn07e1" path="res://player/player.tscn" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://h7xjoc2ck1sp" path="res://enemies/hugger/hugger.tscn" id="2_fj7yv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gv5m4"]
 size = Vector2(87.84375, 23.40625)

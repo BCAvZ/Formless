@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bpf05dkdn07e1"]
 
-[ext_resource type="Script" uid="uid://o1fnvpbif4yn" path="res://player.gd" id="1_4flbx"]
-[ext_resource type="Script" uid="uid://tc4lvq2uhb5j" path="res://squash_stretch.gd" id="2_onrkg"]
-[ext_resource type="Script" uid="uid://b438jqfksgugn" path="res://squeeze.gd" id="3_i3pqv"]
+[ext_resource type="Script" uid="uid://o1fnvpbif4yn" path="res://player/player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://tc4lvq2uhb5j" path="res://player/squash_stretch.gd" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://b438jqfksgugn" path="res://player/squeeze.gd" id="3_i3pqv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sh265"]
 radius = 20.0
