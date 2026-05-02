@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bpf05dkdn07e1"]
+
+[ext_resource type="Script" uid="uid://o1fnvpbif4yn" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://tc4lvq2uhb5j" path="res://squash_stretch.gd" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://b438jqfksgugn" path="res://squeeze.gd" id="3_i3pqv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sh265"]
+radius = 20.0
+
+[node name="Player" type="CharacterBody2D" unique_id=262484128 groups=["player"]]
+script = ExtResource("1_4flbx")
+
+[node name="PlayerHitbox" type="CollisionShape2D" parent="." unique_id=180202402]
+shape = SubResource("CircleShape2D_sh265")
+
+[node name="PlayerModel" type="Polygon2D" parent="." unique_id=1810115422]
+position = Vector2(1, 2)
+color = Color(0.6392157, 0.08235294, 1, 1)
+polygon = PackedVector2Array(1, 11, 9, -6, 2, -18, -14, 1)
+
+[node name="SquashStretch" type="Node" parent="." unique_id=262868716]
+script = ExtResource("2_onrkg")
+
+[node name="Squeeze" type="Node" parent="." unique_id=1895429019]
+script = ExtResource("3_i3pqv")

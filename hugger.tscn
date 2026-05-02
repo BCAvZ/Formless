@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://h7xjoc2ck1sp"]
+
+[ext_resource type="Script" uid="uid://d4dm7qlt67hc" path="res://hugger.gd" id="1_il1ns"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgc0u"]
+size = Vector2(31, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_il1ns"]
+size = Vector2(46, 37)
+
+[node name="hugger" type="CharacterBody2D" unique_id=295790131]
+script = ExtResource("1_il1ns")
+
+[node name="HuggerModel" type="Polygon2D" parent="." unique_id=434841434]
+color = Color(1, 0.3623615, 1, 1)
+polygon = PackedVector2Array(-18, 1, -3, -24, 27, -11, 14, 17)
+
+[node name="HuggerHitbox" type="CollisionShape2D" parent="." unique_id=874043720]
+position = Vector2(7.5, -4.5)
+shape = SubResource("RectangleShape2D_pgc0u")
+
+[node name="HugArea" type="Area2D" parent="." unique_id=2029544981]
+
+[node name="HugCollision" type="CollisionShape2D" parent="HugArea" unique_id=653765222]
+position = Vector2(8, -5.5)
+shape = SubResource("RectangleShape2D_il1ns")
