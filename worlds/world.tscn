@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bpf05dkdn07e1" path="res://player/player.tscn" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://h7xjoc2ck1sp" path="res://enemies/hugger/hugger.tscn" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://dym5nbneqwtkd" path="res://hud/hud.tscn" id="3_c7htk"]
+[ext_resource type="Script" uid="uid://bey05p1bw12cc" path="res://worlds/kill_zone.gd" id="4_wp1yw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gv5m4"]
 size = Vector2(87.84375, 23.40625)
@@ -15,6 +16,9 @@ size = Vector2(333, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tlwt5"]
 radius = 33.37664
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wp1yw"]
+size = Vector2(1933, 46)
 
 [node name="World" type="Node2D" unique_id=449951699]
 
@@ -86,3 +90,10 @@ color = Color(0.9529412, 0.88235295, 0.6666667, 1)
 position = Vector2(697, 372)
 
 [node name="HUD" parent="." unique_id=1919047739 instance=ExtResource("3_c7htk")]
+
+[node name="KillZone" type="Area2D" parent="." unique_id=706329856]
+script = ExtResource("4_wp1yw")
+
+[node name="KillZoneShape" type="CollisionShape2D" parent="KillZone" unique_id=669357906]
+position = Vector2(413.5, 715)
+shape = SubResource("RectangleShape2D_wp1yw")

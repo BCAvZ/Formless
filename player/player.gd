@@ -9,13 +9,15 @@ const SPEED = 200.0
 const JUMP_VELOCITY = -450.0
 const GRAVITY = 1200.0
 
-# --- Coyote time & jump buffer ---
+# --- Variable declarations ---
 const COYOTE_TIME = 0.1
 const JUMP_BUFFER_TIME = 0.1
 
 var coyote_timer := 0.0
 var jump_buffer_timer := 0.0
 var was_on_floor := false
+var is_dead := false
+var last_safe_position: Vector2 = Vector2.ZERO
 
 # --- Hug lock state ---
 # When non-null, the player's movement is locked by another node (e.g. a Hugger).
@@ -44,7 +46,16 @@ func _ready() -> void:
 		Vector2(-11, -18),
 	])
 	blob.color = Color(0.85, 0.85, 1.0)
+	last_safe_position = global_position  # start position is always safe
 
+func recover_from_fall() -> void:
+	# Called by KillZone areas when the player falls into a pit.
+	# Costs 1 HP, then teleports back to last known safe spot — but only
+	# if still alive. If the damage kills, let the normal death loop handle it.
+	Health.take_damage(1)
+	if Health.current > 0:
+		global_position = last_safe_position
+		velocity = Vector2.ZERO
 
 # --- Public API: called by Hugger (or any future grab-style enemy) ---
 
@@ -62,12 +73,16 @@ func _on_squeeze_fired(_direction: String) -> void:
 		unlock_movement()
 
 func _on_died() -> void:
-	# Disable input, play a brief death anim if you want, then respawn.
-	await get_tree().create_timer(0.5).timeout
+	is_dead = true
+	velocity = Vector2.ZERO
+	await get_tree().create_timer(0.6).timeout
 	Health.heal_full()
 	get_tree().reload_current_scene()
 
 func _physics_process(delta: float) -> void:
+
+	if is_dead:
+		return
 
 	if Input.is_action_just_pressed("ui_cancel"):  # Esc by default
 		get_tree().reload_current_scene()
@@ -132,3 +147,8 @@ func _physics_process(delta: float) -> void:
 	was_on_floor = is_on_floor()
 
 	move_and_slide()
+	
+	# Update last safe position whenever we're grounded and not mid-fall.
+# This becomes the respawn point if we hit a KillZone next.
+	if is_on_floor():
+		last_safe_position = global_position

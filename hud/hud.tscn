@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://dym5nbneqwtkd"]
 
+[ext_resource type="Script" uid="uid://c3foj85totfgb" path="res://hud/UI.gd" id="1_6ca3a"]
+
 [node name="HUD" type="CanvasLayer" unique_id=1919047739]
+script = ExtResource("1_6ca3a")
 
 [node name="Pips" type="HBoxContainer" parent="." unique_id=2090745206]
 offset_left = 20.0
@@ -9,17 +12,17 @@ offset_right = 60.0
 offset_bottom = 60.0
 theme_override_constants/separation = 8
 
-[node name="Hitpoint1" type="ColorRect" parent="Pips" unique_id=205143801]
+[node name="Pip1" type="ColorRect" parent="Pips" unique_id=205143801]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 color = Color(0.9309246, 0.9309246, 1, 1)
 
-[node name="Hitpoint2" type="ColorRect" parent="Pips" unique_id=1216628298]
+[node name="Pip2" type="ColorRect" parent="Pips" unique_id=1216628298]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 color = Color(0.9309246, 0.9309246, 1, 1)
 
-[node name="Hitpoint3" type="ColorRect" parent="Pips" unique_id=1788985282]
+[node name="Pip3" type="ColorRect" parent="Pips" unique_id=1788985282]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 color = Color(0.9309246, 0.9309246, 1, 1)

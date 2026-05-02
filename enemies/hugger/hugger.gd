@@ -26,6 +26,12 @@ var player: CharacterBody2D = null
 
 
 func _ready() -> void:
+	# One-shot tutorial guard — once Squeeze is learned, the Hugger is obsolete.
+	# On every scene reload (death/respawn), re-hugging would be unbearable.
+	if AbilityManager.has("squeeze"):
+		queue_free()
+		return
+	
 	# Find player in scene (assumes one player named "Player" in current scene).
 	player = get_tree().get_first_node_in_group("player")
 	hug_area.body_entered.connect(_on_hug_area_entered)
