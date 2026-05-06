@@ -28,7 +28,7 @@ var player: CharacterBody2D = null
 func _ready() -> void:
 	# One-shot tutorial guard — once Squeeze is learned, the Hugger is obsolete.
 	# On every scene reload (death/respawn), re-hugging would be unbearable.
-	if AbilityManager.has("squeeze"):
+	if AbilityManager.has("swipe"):
 		queue_free()
 		return
 	
@@ -73,10 +73,10 @@ func _on_hug_area_entered(body: Node2D) -> void:
 		state = State.HUGGING
 		hugged_player = body
 		body.lock_movement(self)  # see 3c
-		AbilityManager.unlock("squeeze")
+		AbilityManager.unlock("swipe")
 
 
-# Called by player when they successfully squeeze free.
+# Called by player when they successfully swipe free.
 func release_and_fade() -> void:
 	if state != State.HUGGING:
 		return

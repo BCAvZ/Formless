@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://o1fnvpbif4yn" path="res://player/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://tc4lvq2uhb5j" path="res://player/squash_stretch.gd" id="2_onrkg"]
-[ext_resource type="Script" uid="uid://b438jqfksgugn" path="res://player/squeeze.gd" id="3_i3pqv"]
+[ext_resource type="Script" uid="uid://b438jqfksgugn" path="res://player/swipe.gd" id="3_i3pqv"]
 [ext_resource type="PackedScene" uid="uid://ecbo7nrtt1oj" path="res://player/shockwave.tscn" id="4_yw30f"]
 [ext_resource type="Script" uid="uid://dqkciw7hdjlfr" path="res://player/hurtbox.gd" id="5_qjkh3"]
 
@@ -26,8 +26,10 @@ polygon = PackedVector2Array(1, 11, 9, -6, 2, -18, -14, 1)
 [node name="SquashStretch" type="Node" parent="." unique_id=262868716]
 script = ExtResource("2_onrkg")
 
-[node name="Squeeze" type="Node" parent="." unique_id=1895429019]
+[node name="Swipe" type="Node" parent="." unique_id=1895429019 node_paths=PackedStringArray("body", "squash_stretch")]
 script = ExtResource("3_i3pqv")
+body = NodePath("..")
+squash_stretch = NodePath("../SquashStretch")
 shockwave_scene = ExtResource("4_yw30f")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1455886985]
