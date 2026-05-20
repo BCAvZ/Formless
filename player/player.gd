@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var squash_stretch: Node = $SquashStretch
 @onready var swipe: Node = $Swipe
 @onready var blob = $PlayerModel
+@onready var hop: Node = $Hop
 
 # --- Movement constants ---
 const SPEED = 200.0
@@ -11,11 +12,6 @@ const JUMP_VELOCITY = -450.0
 const GRAVITY = 1200.0
 
 # --- Variable declarations ---
-const COYOTE_TIME = 0.1
-const JUMP_BUFFER_TIME = 0.1
-
-var coyote_timer := 0.0
-var jump_buffer_timer := 0.0
 var was_on_floor := false
 var is_dead := false
 var last_safe_position: Vector2 = Vector2.ZERO
@@ -46,6 +42,7 @@ func _ready() -> void:
 	last_safe_position = global_position
 	swipe.fired.connect(_on_swipe_fired)
 	Health.died.connect(_on_died)
+	hop.fired.connect(_on_hop_fired)
 
 
 func _on_swipe_fired() -> void:
@@ -53,6 +50,10 @@ func _on_swipe_fired() -> void:
 		locked_by.release_and_fade()
 		unlock_movement()
 
+func _on_hop_fired() -> void:
+	if locked_by != null:
+		locked_by.release_and_fade()
+		unlock_movement()
 
 func recover_from_fall() -> void:
 	# Called by KillZone areas when the player falls into a pit.
@@ -73,6 +74,7 @@ func lock_movement(by: Node) -> void:
 
 func unlock_movement() -> void:
 	locked_by = null
+	hop.was_on_floor = false  # reset so hop re-syncs next frame
 
 
 func _on_died() -> void:
@@ -99,6 +101,7 @@ func _physics_process(delta: float) -> void:
 		if not is_on_floor():
 			velocity.y += GRAVITY * delta
 		swipe.update(delta)
+		hop.update(delta)
 		move_and_slide()
 		was_on_floor = is_on_floor()
 		return
@@ -106,26 +109,6 @@ func _physics_process(delta: float) -> void:
 	# --- Gravity ---
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
-
-	# --- Coyote time ---
-	if was_on_floor and not is_on_floor():
-		coyote_timer = COYOTE_TIME
-	if coyote_timer > 0:
-		coyote_timer -= delta
-
-	# --- Jump buffer ---
-	if Input.is_action_just_pressed("ui_accept"):
-		jump_buffer_timer = JUMP_BUFFER_TIME
-	if jump_buffer_timer > 0:
-		jump_buffer_timer -= delta
-
-	# --- Jump logic ---
-	var can_jump = is_on_floor() or coyote_timer > 0
-	if jump_buffer_timer > 0 and can_jump:
-		velocity.y = JUMP_VELOCITY
-		jump_buffer_timer = 0.0
-		coyote_timer = 0.0
-		squash_stretch.on_jump()
 
 	# --- Landing detection ---
 	if not was_on_floor and is_on_floor():
@@ -136,6 +119,9 @@ func _physics_process(delta: float) -> void:
 
 	# --- Swipe ---
 	swipe.update(delta)
+	
+	# --- Hop ---
+	hop.update(delta)
 
 	# --- Horizontal movement ---
 	var direction = Input.get_axis("ui_left", "ui_right")
